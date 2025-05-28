@@ -121,5 +121,35 @@ const createBlog = async (req, res) => {
 };
 
 
+const editBlog = async (req, res) => {
+  try {
+    const userId = req.user.userId; // comes from auth middleware
+    const blogId = req.params.blogId;
+    const { title, content } = req.body;
 
-export default {signup, login, homepage, createBlog}
+    if (!title || !content) {
+      return res.status(400).json({ message: 'Title and content are required.' });
+    }
+
+    const user = await userModel.findById(userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const blog = user.blogs.id(blogId);
+    if (!blog) return res.status(404).json({ message: 'Blog not found' });
+
+    // Update fields
+    blog.title = title;
+    blog.content = content;
+    blog.updatedAt = new Date();
+
+    await user.save();
+
+    res.status(200).json({ message: 'Blog updated successfully', blog });
+  } catch (error) {
+    console.error('Error editing blog:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
+export default {signup, login, homepage, createBlog, editBlog}

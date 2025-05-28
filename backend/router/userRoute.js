@@ -7,5 +7,6 @@ router.get('/', userController.homepage);
 router.post('/signup', userController.signup)
 router.post('/login', userController.login)
 router.post('/create', verifyUser, userController.createBlog)
+router.put('/edit/:blogId', verifyUser, userController.editBlog);
 
 export default router; 
