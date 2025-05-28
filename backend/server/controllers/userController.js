@@ -4,6 +4,10 @@ import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
 
+const homepage = async (req, res) =>{
+        res.json({ data: "This is the Home Page" });
+}
+
 const signup =  async (req, res) => {
 
     try {
@@ -73,5 +77,49 @@ const login = async (req, res) => {
 };
 
 
+const createBlog = async (req, res) => {
+  try {
+    const userId = req.user.userId; // You should set this from auth middleware
+    const { title, content } = req.body;
 
-export default {signup, login}
+    if (!title || !content) {
+      return res.status(400).json({ message: 'Title and content are required.' });
+    }
+
+    // Find user by ID
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Create blog post
+    const newBlog = {
+      title,
+      content,
+      createdAt: new Date(),
+      published: true
+    };
+
+    // Add blog to user's blogs array
+    user.blogs.push(newBlog);
+
+    await user.save();
+
+    // Return the created blog
+    const createdBlog = user.blogs[user.blogs.length - 1];
+
+    res.status(201).json({
+      message: 'Blog created successfully.',
+      blog: createdBlog
+    });
+
+  } catch (error) {
+    console.error('Error creating blog:', error);
+    res.status(500).json({ message: 'Internal server error.' });
+  }
+};
+
+
+
+export default {signup, login, homepage, createBlog}

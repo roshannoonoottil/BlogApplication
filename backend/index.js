@@ -10,11 +10,11 @@ app.use(express.json());
 connectDB();
 
 // Test route
-app.get('/', (req, res) => {
-  res.send('Hello from Node.js backend!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello from Node.js backend!');
+// });
 
-app.use('/user', userRouter);
+app.use('/', userRouter);
 
 // Start server
 app.listen(PORT, () => {

@@ -13,23 +13,50 @@ export const connectDB = async () => {
   }
 };
 
+// ✅ Blog subdocument schema
+const blogSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  published: {
+    type: Boolean,
+    default: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+}, { _id: true }); 
+
+// ✅ User schema with embedded blogs
 const userSchema = new Schema({
   fullName: {
     type: String,
     required: true,
     trim: true,
   },
+
   email: {
     type: String,
     required: true,
     trim: true,
     unique: true,
   },
+
   password: {
     type: String,
-    required: true,   
+    required: true,
     trim: true,
   },
-}, { timestamps: true });  
+
+  blogs: [blogSchema], // ⬅️ Embedding minimal blog details
+
+}, { timestamps: true });
 
 export default model("User", userSchema);
