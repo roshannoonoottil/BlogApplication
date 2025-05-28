@@ -4,5 +4,6 @@ import userController from '../server/controllers/userController.js';
 
 
 router.post('/signup', userController.signup)
+router.post('/login', userController.login)
 
 export default router;
