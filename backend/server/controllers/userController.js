@@ -3,9 +3,30 @@ import bcrypt from 'bcryptjs'
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
+const getAllBlogs = async (req, res) =>{
+        try {
+    // Get all users and their blog posts
+    const users = await userModel.find({}, 'fullName blogs'); // Select only fullName and blogs
 
-const homepage = async (req, res) =>{
-        res.json({ data: "This is the Home Page" });
+    // Flatten the blogs into a single list
+    const allBlogs = users.flatMap(user => {
+      return user.blogs.map(blog => ({
+        blogId: blog._id,
+        title: blog.title,
+        content: blog.content,
+        author: user.fullName,
+        createdAt: blog.createdAt
+      }));
+    });
+
+    // Optional: Sort by latest
+    allBlogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    res.status(200).json(allBlogs);
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 }
 
 const signup =  async (req, res) => {
@@ -175,4 +196,4 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-export default {signup, login, homepage, createBlog, editBlog, deleteBlog}
+export default {signup, login, getAllBlogs, createBlog, editBlog, deleteBlog}
