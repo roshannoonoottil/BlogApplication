@@ -8,5 +8,6 @@ router.post('/signup', userController.signup)
 router.post('/login', userController.login)
 router.post('/create', verifyUser, userController.createBlog)
 router.put('/edit/:blogId', verifyUser, userController.editBlog);
+router.delete('/delete/:blogId', verifyUser, userController.deleteBlog);
 
 export default router; 
