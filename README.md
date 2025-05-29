@@ -78,25 +78,28 @@ backend/
 
 ### 📦 Installation
 
-1. **Clone the Repository**
+ **Clone the Repository**
    ```bash
    git clone https://github.com/your-username/infinity-blog.git
    cd infinity-blog
-
+```
 Install Dependencies
 
 For frontend:
 
+```bash
 cd frontend
 npm install
-
+```
 For backend:
 
+```bash
 cd backend
 npm install
-
+```
 
 Run the Application
 In both frontend and backend folders, run:
-
+```bash
 npm run dev
+```
