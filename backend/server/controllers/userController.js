@@ -63,7 +63,8 @@ const signup =  async (req, res) => {
 const login = async (req, res) => {
     try {
         console.log('Login Controller');
-
+        console.log(req.body);
+        
         // Find user by email
         const userData = await userModel.findOne({ email: req.body.email });
         if (!userData) {
