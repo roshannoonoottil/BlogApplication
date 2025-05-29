@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000', // Update this if you deploy later
+  baseURL: 'https://infinityblog.onrender.com', // Update this if you deploy later
 });
 
 // Attach token to every request if stored in localStorage

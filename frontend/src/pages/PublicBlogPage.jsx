@@ -12,7 +12,7 @@ function PublicBlogPage() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/user/publicblog/${id}`);
+        const response = await axios.get(`https://infinityblog.onrender.com/user/publicblog/${id}`);
         setBlog(response.data);
       } catch (error) {
         console.error('Error fetching blog:', error);

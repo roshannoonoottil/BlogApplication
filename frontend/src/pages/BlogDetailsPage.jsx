@@ -18,7 +18,7 @@ function BlogDetailsPage() {
 
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/user/singleblog/${id}`, {
+        const response = await axios.get(`https://infinityblog.onrender.com/user/singleblog/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -39,7 +39,7 @@ function BlogDetailsPage() {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:3000/user/delete/${id}`, {
+      await axios.delete(`https://infinityblog.onrender.com/user/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -25,7 +25,7 @@ function BlogFormPage() {
     if (id) {
       setLoading(true);
       axios
-        .get(`http://localhost:3000/user/singleblog/${id}`, {
+        .get(`https://infinityblog.onrender.com/user/singleblog/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {

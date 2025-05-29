@@ -17,7 +17,7 @@ function UserHome() {
 
     const fetchUserBlogs = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/user/blogs', {
+        const response = await axios.get('https://infinityblog.onrender.com/user/blogs', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

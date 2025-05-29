@@ -7,7 +7,7 @@ const PORT = 3000;
 
 
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow Vite frontend
+  origin: 'https://infinityblog.vercel.app/', // Allow Vite frontend
   credentials: true, // If you're using cookies
 }));
 // Middleware to parse JSON
