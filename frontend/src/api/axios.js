@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000', // Update to your backend base URL
+  baseURL: 'http://localhost:3000', // Update this if you deploy later
 });
 
-// Attach token to every request if available
+// Attach token to every request if stored in localStorage
 API.interceptors.request.use((req) => {
   const user = JSON.parse(localStorage.getItem('user'));
   if (user?.token) {
