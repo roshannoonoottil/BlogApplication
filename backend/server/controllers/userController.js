@@ -99,6 +99,38 @@ const login = async (req, res) => {
 };
 
 
+const getLoggedUserBlogs = async (req, res) => {
+  try {
+    const userId = req.user.userId; // set by your auth middleware
+
+    // Find the user by ID and get only their blogs
+    const user = await userModel.findById(userId, 'fullName blogs');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Format blogs with author's name
+    const userBlogs = user.blogs.map(blog => ({
+      blogId: blog._id,
+      title: blog.title,
+      content: blog.content,
+      author: user.fullName,
+      createdAt: blog.createdAt,
+      published: blog.published
+    }));
+
+    // Optional: Sort by createdAt descending
+    userBlogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    res.status(200).json(userBlogs);
+  } catch (error) {
+    console.error('Error fetching user blogs:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
 const createBlog = async (req, res) => {
   try {
     const userId = req.user.userId; // You should set this from auth middleware
@@ -142,6 +174,36 @@ const createBlog = async (req, res) => {
   }
 };
 
+const getSingleUserBlog = async (req, res) => {
+  try {
+    const userId = req.user.userId; // From auth middleware
+    const blogId = req.params.id;
+
+    // Find the user and the blog
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const blog = user.blogs.id(blogId); // Mongoose subdocument query
+
+    if (!blog) {
+      return res.status(404).json({ message: 'Blog not found' });
+    }
+
+    res.status(200).json({
+      blogId: blog._id,
+      title: blog.title,
+      content: blog.content,
+      published: blog.published,
+      createdAt: blog.createdAt,
+    });
+  } catch (error) {
+    console.error('Error fetching single blog:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
 const editBlog = async (req, res) => {
   try {
@@ -197,4 +259,4 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-export default {signup, login, getAllBlogs, createBlog, editBlog, deleteBlog}
+export default {signup, login, getAllBlogs, getLoggedUserBlogs, getSingleUserBlog,  createBlog, editBlog, deleteBlog}

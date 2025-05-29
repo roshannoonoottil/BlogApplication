@@ -6,27 +6,39 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const authUser = useSelector((state) => state.auth.user); // adjust based on your slice
+  const authUser = useSelector((state) => state.auth.user);
+  const token = localStorage.getItem('userblogtoken');
 
   const handleLogout = () => {
     dispatch(logout());
-    localStorage.removeItem('userblogtoken'); // clear token if stored
+    localStorage.removeItem('userblogtoken');
     navigate('/login');
   };
 
-  const token = localStorage.getItem('userblogtoken');
-
   return (
-     <nav className="p-4" style={{ backgroundColor: '#3A506B' }}>
+    <nav className="p-4" style={{ backgroundColor: '#3A506B' }}>
       <div className="container mx-auto flex justify-between items-center">
-        <h1
-          className="text-white text-2xl font-bold cursor-pointer"
+
+        {/* Logo and Title */}
+        <div
+          className="flex items-center gap-2 cursor-pointer"
           onClick={() => navigate('/')}
         >
-          MyBlog
-        </h1>
+          <img src="/Icon.png" alt="Logo" className="w-8 h-8 rounded-full" />
+          <h1 className="text-white text-2xl font-bold">Techie Blog</h1>
+        </div>
 
-        <div className="text-right">
+        {/* Right Side (Menu + Auth) */}
+        <div className="flex items-center gap-4">
+          {token && (
+            <button
+              onClick={() => navigate('/userhome')}
+              className="text-white font-medium hover:underline"
+            >
+              My Blogs
+            </button>
+          )}
+
           {token ? (
             <>
               <button
@@ -35,7 +47,7 @@ const Navbar = () => {
               >
                 Logout
               </button>
-              <p className="text-white mt-1 text-sm">
+              <p className="text-white mt-1 text-sm hidden sm:block">
                 Welcome, <span className="font-semibold">{authUser?.fullName}</span>
               </p>
             </>
@@ -48,6 +60,7 @@ const Navbar = () => {
             </button>
           )}
         </div>
+
       </div>
     </nav>
   );
