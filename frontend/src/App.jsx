@@ -5,7 +5,6 @@ import HomePage from './pages/Home';
 import UserHome from './pages/UserHome';
 import CreateBlogPage from './pages/CreateBlogPage';
 import BlogDetailsPage from './pages/BlogDetailsPage';
-import EditBlogPage from './pages/EditBlogPage';
 import Navbar from './components/Navbar';
 import PublicBlogPage from './pages/PublicBlogPage';
 
@@ -22,7 +21,7 @@ function App() {
       <Route path="/create" element={<CreateBlogPage />} />
       <Route path="/singleblog/:id" element={<BlogDetailsPage />} />
       <Route path="/publicblog/:id" element={<PublicBlogPage />} />
-      <Route path="/edit/:id" element={<EditBlogPage />} />
+      <Route path="/edit/:id" element={<CreateBlogPage />} />
     </Routes>
     </>
   );

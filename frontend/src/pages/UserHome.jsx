@@ -48,13 +48,21 @@ function UserHome() {
 
   return (
     <div className="min-h-screen bg-[#FFF9C4] p-6">
-  <h1 className="text-4xl font-bold text-[#6D6D7A] mb-8 text-center">Your Posts</h1>
+  <div className="flex justify-between items-center mb-8">
+    <h1 className="text-4xl font-bold text-[#6D6D7A] text-center flex-1">Your Posts</h1>
+    <button
+      onClick={() => navigate('/create')}
+      className="bg-[#6D6D7A] text-white px-4 py-2 rounded-lg hover:bg-[#5a5a66] transition ml-4"
+    >
+      + Create Blog
+    </button>
+  </div>
 
   {userBlogs.length === 0 ? (
     <p className="text-center text-gray-700">You haven't created any blogs yet.</p>
   ) : (
     <>
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
         {currentBlogs.map((blog) => (
           <div
             key={blog.blogId}
@@ -101,7 +109,6 @@ function UserHome() {
     </>
   )}
 </div>
-
 
   );
 }
