@@ -1,14 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/Home';
 import CreateBlogPage from './pages/CreateBlogPage';
 import BlogDetailsPage from './pages/BlogDetailsPage';
 import EditBlogPage from './pages/EditBlogPage';
+import Navbar from './components/Navbar';
 
 function App() {
 
  return (
+    <>
+    <Navbar/>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -17,6 +20,7 @@ function App() {
       <Route path="/blog/:id" element={<BlogDetailsPage />} />
       <Route path="/edit/:id" element={<EditBlogPage />} />
     </Routes>
+    </>
   );
 }
 

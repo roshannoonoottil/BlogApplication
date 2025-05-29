@@ -1,9 +1,15 @@
 import express from 'express';
+import cors from 'cors';
 import userRouter from './router/userRoute.js'
 import { connectDB } from "./server/models/userModel.js";
 const app = express();
 const PORT = 3000;
 
+
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow Vite frontend
+  credentials: true, // If you're using cookies
+}));
 // Middleware to parse JSON
 app.use(express.json());
 
@@ -14,7 +20,7 @@ connectDB();
 //   res.send('Hello from Node.js backend!');
 // });
 
-app.use('/', userRouter);
+app.use('/user', userRouter);
 
 // Start server
 app.listen(PORT, () => {
