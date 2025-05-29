@@ -52,21 +52,22 @@ Infinity Blog provides an intuitive blogging experience with features like secur
 
 ## 📂 Project Structure
 
+```
 frontend/
-├── api/ # Axios calls
-├── components/ # Shared UI components
-├── pages/ # Page views
-├── redux/ # Slices and store setup
-└── App.jsx # Main app and routes
+├── api/             # Axios calls
+├── components/      # Shared UI components
+├── pages/           # Page views
+├── redux/           # Slices and store setup
+└── App.jsx          # Main app and routes
 
 backend/
-├── controllers/ # Logic for routes
-├── models/ # Mongoose schemas
-├── routes/ # Express route definitions
-├── middleware/ # JWT authentication middleware
-└── index.js # Server entry point
+├── controllers/     # Logic for routes
+├── models/          # Mongoose schemas
+├── routes/          # Express route definitions
+├── middleware/      # JWT authentication middleware
+└── index.js         # Server entry point
+```
 
----
 
 ## 🚀 Getting Started
 
