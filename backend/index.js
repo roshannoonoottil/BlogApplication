@@ -5,11 +5,27 @@ import { connectDB } from "./server/models/userModel.js";
 const app = express();
 const PORT = 3000;
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://infinityblog.vercel.app", // ✅ Deployed frontend
+        "http://localhost:3000", // ✅ Local development frontend
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // ✅ Required for cookies/auth headers
+    exposedHeaders: ["set-cookie"] // Important for iOS
+  })
+);
 
-app.use(cors({
-  origin: 'https://infinityblog.vercel.app/', // Allow Vite frontend
-  credentials: true, // If you're using cookies
-}));
+
 // Middleware to parse JSON
 app.use(express.json());
 
