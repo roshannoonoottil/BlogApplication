@@ -25,7 +25,7 @@ const Navbar = () => {
           onClick={() => navigate('/')}
         >
           <img src="/Icon.png" alt="Logo" className="w-8 h-8 rounded-full" />
-          <h1 className="text-white text-2xl font-bold">Techie Blog</h1>
+          <h1 className="text-white text-2xl font-bold">Infinity Blog</h1>
         </div>
 
         {/* Right Side (Menu + Auth) */}

@@ -12,8 +12,16 @@ function BlogFormPage() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
 
+  
+
   // Fetch existing blog data if editing
   useEffect(() => {
+
+        if (!token) {
+      navigate('/login');
+      return;
+    }
+
     if (id) {
       setLoading(true);
       axios
@@ -57,49 +65,50 @@ function BlogFormPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF9C4] flex justify-center items-center p-6">
-      <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl w-full">
-        <h2 className="text-3xl font-bold text-[#6D6D7A] mb-6 text-center">
-          {id ? 'Edit Blog' : 'Create Blog'}
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block font-medium mb-1">Title</label>
-            <input
-              type="text"
-              className="w-full border rounded px-3 py-2"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label className="block font-medium mb-1">Content</label>
-            <textarea
-              className="w-full border rounded px-3 py-2 h-48"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              required
-            ></textarea>
-          </div>
-          <div className="flex justify-between mt-6">
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-[#6D6D7A] hover:bg-[#5a5a66] text-white px-6 py-2 rounded"
-            >
-              {id ? 'Update Blog' : 'Create Blog'}
-            </button>
-          </div>
-        </form>
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 to-yellow-200 flex justify-center items-center p-4">
+  <div className="bg-white shadow-md rounded-2xl p-6 w-full max-w-md">
+    <h2 className="text-2xl font-semibold text-gray-700 mb-4 text-center">
+      {id ? 'Edit Blog' : 'Create Blog'}
+    </h2>
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div>
+        <label className="block text-sm font-medium text-gray-600 mb-1">Title</label>
+        <input
+          type="text"
+          className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
       </div>
-    </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-600 mb-1">Content</label>
+        <textarea
+          className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm h-40 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+        />
+      </div>
+      <div className="flex justify-between items-center pt-4">
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md transition"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="text-sm bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-md transition"
+        >
+          {id ? 'Update Blog' : 'Create Blog'}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
   );
 }
 
