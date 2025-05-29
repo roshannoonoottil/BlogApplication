@@ -11,6 +11,7 @@ router.post('/create', verifyUser, userController.createBlog)
 router.put('/edit/:blogId', verifyUser, userController.editBlog);
 router.delete('/delete/:blogId', verifyUser, userController.deleteBlog);
 router.get('/blogs', verifyUser, userController.getLoggedUserBlogs);
+router.get('/publicblog/:id',userController.getSingleBlogPublic);
 
 
 export default router; 

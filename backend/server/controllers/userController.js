@@ -259,4 +259,35 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-export default {signup, login, getAllBlogs, getLoggedUserBlogs, getSingleUserBlog,  createBlog, editBlog, deleteBlog}
+const getSingleBlogPublic = async (req, res) => {
+  try {
+    const blogId = req.params.id;
+
+    // Find the user document which has this blog subdocument
+    const userWithBlog = await userModel.findOne(
+      { "blogs._id": blogId },
+      { "blogs.$": 1 } // Project only the matched blog inside blogs array
+    );
+
+    if (!userWithBlog || !userWithBlog.blogs.length) {
+      return res.status(404).json({ message: 'Blog not found' });
+    }
+
+    const blog = userWithBlog.blogs[0];
+
+    res.status(200).json({
+      blogId: blog._id,
+      title: blog.title,
+      content: blog.content,
+      published: blog.published,
+      createdAt: blog.createdAt,
+      // Add other fields if needed
+    });
+  } catch (error) {
+    console.error('Error fetching blog for guest:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
+export default {signup, login, getAllBlogs, getLoggedUserBlogs, getSingleUserBlog,  createBlog, editBlog, deleteBlog, getSingleBlogPublic}

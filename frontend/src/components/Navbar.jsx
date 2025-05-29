@@ -33,7 +33,7 @@ const Navbar = () => {
           {token && (
             <button
               onClick={() => navigate('/userhome')}
-              className="text-white font-medium hover:underline"
+              className="text-white font-medium hover:text-green-500 transition"
             >
               My Blogs
             </button>
@@ -41,15 +41,15 @@ const Navbar = () => {
 
           {token ? (
             <>
+                <p className="text-white mt-1 text-sm hidden sm:block">
+                Welcome, <span className="font-semibold">{authUser?.fullName}</span>
+              </p>
               <button
                 onClick={handleLogout}
                 className="bg-white text-[#3A506B] font-semibold px-4 py-2 rounded hover:bg-gray-100 transition"
               >
                 Logout
               </button>
-              <p className="text-white mt-1 text-sm hidden sm:block">
-                Welcome, <span className="font-semibold">{authUser?.fullName}</span>
-              </p>
             </>
           ) : (
             <button
