@@ -2,6 +2,7 @@
 
 Infinity Blog is a full-stack blogging platform that allows users to create, manage, and explore blog content with authentication and a clean, responsive UI.
 
+👉 **Live Site:** [https://infinityblog.vercel.app](https://infinityblog.vercel.app)
 ---
 
 ## 🧠 Overview
