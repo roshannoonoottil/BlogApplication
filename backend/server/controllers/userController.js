@@ -133,7 +133,7 @@ const getLoggedUserBlogs = async (req, res) => {
 
 const createBlog = async (req, res) => {
   try {
-    const userId = req.user.userId; // You should set this from auth middleware
+    const userId = req.user.userId; 
     const { title, content } = req.body;
 
     if (!title || !content) {
